@@ -18,11 +18,11 @@
   ;; XXX: should take either a symbol or string.
   ;; can test if it's a string with (typep file :string)
   (flet ((download (file) (add-to-cache file (to-json (flexi-streams:octets-to-string (drakma:http-request (make-uri file)))))))
-  	(if force
-		(download file)
-		(if (cached? file)
-	      	(gethash (to-sym file) *cache*)
-			(download file)))))
+    (if force
+	(download file)
+	(if (cached? file)
+	    (gethash (to-sym file) *cache*)
+	    (download file)))))
 
 (defun lookup (file)
   "Alias for make-request; either of these should be removed (probably make-request)"
@@ -103,7 +103,7 @@
   (lookup (maintainer-to-uri name)))
 
 (defun ports-for (name)
-  "Return list of ports (`basepkgpath`) for a given maintainer"
+  "Return list of ports (`basepkgpath` `ignore` `ver` `newver`) for a given maintainer"
   (mapcar (lambda (x) (list (jsown:val x "basepkgpath")
 			    (jsown:val x "ignore")
 			    (jsown:val x "ver")
