@@ -111,8 +111,11 @@
 
 (defun new-ports-for (name)
   "Return a list of pairs (`basepkgpath` . `newver`) for a given maintainer"
-  (delq (mapcar (lambda (x) (unless (or (null (nth 3 x)) (eq 1 (nth 1 x)))
-			      (cons
-			       (nth 0 x) ; basepkgpath
-			       (nth 3 x)))) ; newver
-		(ports-for name))))
+  (labels ((basepkgpath (port) (nth 0 port))
+	   (newver (port) (nth 3 port))
+	   (newver? (port) (null (newver port)))
+	   (ignore (port) (nth 1 port))
+	   (ignored? (port) (eq 1 (ignore port))))
+    (delq (mapcar (lambda (x) (unless (or (newver? x) (ignored? x))
+				(cons (basepkgpath x) (newver x))))
+		  (ports-for name)))))
