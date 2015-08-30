@@ -104,12 +104,10 @@
 
 (defun ports-for (name)
   "Return list of ports (`basepkgpath`) for a given maintainer"
-  (flet ((cons4 (a b c d)
-	   (alexandria:flatten (cons (cons (cons a b) c) d))))
-    (mapcar (lambda (x) (cons4 (jsown:val x "basepkgpath")
-			       (jsown:val x "ignore")
-			       (jsown:val x "ver")
-			       (jsown:val x "newver"))) (maintainer-data name))))
+  (mapcar (lambda (x) (list (jsown:val x "basepkgpath")
+			    (jsown:val x "ignore")
+			    (jsown:val x "ver")
+			    (jsown:val x "newver"))) (maintainer-data name)))
 
 (defun new-ports-for (name)
   "Return a list of pairs (`basepkgpath` . `newver`) for a given maintainer"
