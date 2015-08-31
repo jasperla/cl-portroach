@@ -5,9 +5,9 @@ Common Lisp library to interact with [OpenBSD Portroach](http://portroach.openbs
 Still very much a WIP and lacks documentation, but partly works quite fine:
 
     CL-USER> (portroach:new-ports-for "jasper")
-    (("devel/libffi" "3.2.1") ("devel/msp430/msp430mcu" "")
-     ("devel/ruby-rspec/serverspec" "2.22.0") ("devel/ruby-rspec/specinfra" "2.42.2")
-     ("sysutils/logstash/logstash" "1.5.4"))
+    (("devel/libffi" . "3.2.1") ("devel/ruby-rspec/serverspec" . "2.22.0")
+     ("devel/ruby-rspec/specinfra" . "2.42.2")
+     ("sysutils/logstash/logstash" . "1.5.4"))
     CL-USER>
 
 ## Examples
@@ -38,3 +38,14 @@ The cache can be updated with `update-cache` or purged with `clean-cache`.
 ## Viewing headers
 
 	(setf drakma:*header-stream* *standard-output*)
+
+## Copyright
+
+2015 Jasper Lievisse Adriaanse <j@jasper.la> released under the MIT license.
+
+## Contributing
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request
