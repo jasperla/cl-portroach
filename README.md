@@ -39,6 +39,13 @@ The cache can be updated with `update-cache` or purged with `clean-cache`.
 
 	(setf drakma:*header-stream* *standard-output*)
 
+## ToDo
+
+- The actual API needs to be clearly defined and refrain from printing
+  to `*standard-output*`. Instead wrapper `print-` functions should be
+  used for that purpose.
+- Documentation
+
 ## Copyright
 
 2015 Jasper Lievisse Adriaanse <j@jasper.la> released under the MIT license.
