@@ -6,6 +6,7 @@
    #:make-request
    #:print-cache
    #:clear-cache
+   #:update-cache
    #:summary
    #:print-summary
    #:maintainers

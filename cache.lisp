@@ -28,3 +28,8 @@
 (defun clean-cache ()
   "Purge the entire cache."
   (clrhash *cache*))
+
+(defun update-cache ()
+  "Update the existing cache."
+  (mapcar (lambda (x) (make-request x :force t))
+	  (maphash #'print-cache-files *cache*)))
