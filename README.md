@@ -18,7 +18,7 @@ of how `cl-portroach` should function.
 	(update-cache) => updates the cache
 	(clean-cache) => purges the cache
 
-	(summary :field "total_ports") => 7517
+	(summary :total_ports) => 7536
 	(print-summary) => pretty printed summary
 
 	(print-maintainers) => list of all maintainers, including their stats

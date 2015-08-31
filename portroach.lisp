@@ -28,12 +28,12 @@
   "Alias for make-request; either of these should be removed (probably make-request)"
   (make-request file))
 
-(defun summary (&key field)
+(defun summary (&optional field)
   "Return the full summary object or just the given :field.
    For example: (summary :field \"total_ports\")"
   (let ((json (jsown:val (lookup "totals.json") "summary")))
     (if field
-	(jsown:val json field)
+	(jsown:val json (string-downcase field))
 	json)))
 
 (defun print-summary ()
