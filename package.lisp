@@ -17,4 +17,5 @@
    #:name-to-uri
    #:maintainer-to-uri
    #:ports-for
-   #:new-ports-for))
+   #:new-ports-for
+   #:describe-maintainer))

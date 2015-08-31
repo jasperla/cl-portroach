@@ -81,7 +81,7 @@
      (delq
       (mapcar (lambda (x) (contains-maintainer name x)) lst)))))
 
-(defun maintainer-to-uri (name &key (direct t) )
+(defun maintainer-to-uri (name &key (direct t))
   "Lookup the maintainer `name` and return a single uri or `nil`. If
    `direct` is true the shortest match will be used for it's the direct
     match (without co-maintainers), otherwise `ports-for` will fail if
@@ -119,3 +119,27 @@
     (delq (mapcar (lambda (x) (unless (or (newver? x) (ignored? x))
 				(cons (basepkgpath x) (newver x))))
 		  (ports-for name)))))
+
+;; XXX: Factor out common bits between this and maintainer-to-uri.
+;; Also, this is now essentially a printing function if no `field` is passed
+(defun describe-maintainer (name &key (direct t) (field nil))
+  "Describe a maintainer or return a single value only."
+  (let ((result (search-for name)))
+    (if direct
+	(progn
+	  (let ((m (car (sort result (lambda (x y) (< (length x) (length y)))))))
+	    (if m
+		(delq
+		 (mapcar
+		  (lambda (x)
+		    (when (eq m (jsown:val x "maintainer"))
+		      (if field
+			(jsown:val x (string-downcase field))
+			(print-maintainer x))))
+		  (maintainers)))
+		(format t "No result found for \"~A\"~%" name))))
+	(if (> (length result) 1)
+	    (progn
+	      (format t "Multiple maintainers found matching: ~A:~%~{\"~A,\"~%~}~%" name result)
+	      nil)))))
+
