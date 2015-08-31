@@ -48,7 +48,7 @@
 
 (defun print-maintainers ()
   "Pretty print all maintainers"
-  (mapcar 'print-maintainer (maintainers)))
+  (delq (mapcar 'print-maintainer (maintainers))))
 
 (defun print-maintainer (maintainer)
   "Pretty print maintainer"
